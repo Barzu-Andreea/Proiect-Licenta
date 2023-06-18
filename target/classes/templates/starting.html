@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+  <title>Welcome to Discover Iasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{/css/starting.css}" />
+</head>
+
+<body>
+<section class="header">
+  <nav>
+    <div class="nav-links" id="navLinks">
+      <i class="fa fa-times" onclick="hideMenu()"></i>
+      <ul>
+        <li><a href="/atractii">ATTRACTIONS</a></li>
+        <li><a href="/best">ITINERARY</a></li>
+        <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+        <li><a href="/memory">POSTCARD</a></li>
+        <li><a href="/postcards">TRIP MEMORIES</a></li>
+        <li><a href="/checkIn">HOTEL</a></li>
+        <li><a href="/search">IAȘI MAP</a></li>
+        <li><a href="/weather">WEATHER</a></li>
+      </ul>
+    </div>
+    <i class="fa fa-bars" onclick="showMenu()"></i>
+  </nav>
+
+  <div class="container-startup">
+    <h1>Discover Iasi</h1>
+    <div class="profile">
+
+
+      <p th:text="${helloMessage}">Welcome back!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h1>ABOUT ME</h1>
+  <div class="row">
+
+
+
+    <div class="icons">
+      <p>
+      <h3>Barzu <br> Andreea</h3>
+      <a href="https://www.facebook.com/andreea.barzu"><ion-icon name="logo-facebook"></ion-icon></a>
+      <a href="https://www.instagram.com/_andreeabarzu/"><ion-icon name="logo-instagram"></ion-icon></a>
+      <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+      </p>
+    </div>
+    </div>
+
+  </div>
+
+  <p class="about-app">
+    I aimed to assist individuals in their journey to discover this captivating city. Iasi is rich in history, culture, and attractions, but navigating through its various landmarks and hidden gems can be overwhelming for newcomers. With this application, I sought to simplify the process by offering a comprehensive guide to the city's renowned landmarks, museums, parks, restaurants, and events. By providing detailed information, interactive maps, and personalized recommendations, my goal was to empower visitors and locals alike to make the most of their time in Iasi, ensuring an enriching and memorable experience  </p>
+</section>
+
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+    function hideMenu() {
+        navLinks.style.right = "-250px";
+    }
+</script>
+
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>

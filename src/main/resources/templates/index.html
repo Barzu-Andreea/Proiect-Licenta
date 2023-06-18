@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+    <script src="https://atlas.microsoft.com/sdk/javascript/search/2/atlas.search.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+        }
+
+        #myMap {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var map;
+
+        function InitMap() {
+            map = new atlas.Map('myMap', {
+                language: 'en-US',
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: 'UwC-YUGM77leO589nwXnaesMfJVxea7ib3shhvKJWCM'
+                }
+            });
+        }
+
+        function search() {
+            var query = document.getElementById('searchInput').value;
+
+            atlas.service.GeocodeSearchURL.create({
+                query: query,
+                view: 'Auto'
+            }).then(function (url) {
+                return fetch(url);
+            }).then(function (response) {
+                return response.json();
+            }).then(function (results) {
+                var firstResult = results.results[0];
+                if (firstResult) {
+                    var position = firstResult.position;
+                    map.setCamera({
+                        center: [position.lon, position.lat],
+                        zoom: 12
+                    });
+                }
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+    </script>
+</head>
+<body onload="InitMap()">
+<div>
+    <input type="text" id="searchInput" placeholder="Search..." />
+    <button onclick="search()">Search</button>
+</div>
+<div id="myMap"></div>
+</body>
+</html>
+

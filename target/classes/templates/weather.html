@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Planner</title>
+    <link rel="stylesheet" th:href="@{/css/starting.css}" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('https://i.pinimg.com/originals/9d/eb/08/9deb08cbac490f5fa43032499f61c581.jpg');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            padding: 2% 3%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+        .nav-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #cd4137;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+
+        .information {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 5px;
+        }
+        p {
+            color: black;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <nav>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="/atractii">ATTRACTIONS</a></li>
+                <li><a href="/best">ITINERARY</a></li>
+                <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+                <li><a href="/memory">POSTCARD</a></li>
+                <li><a href="/postcards">TRIP MEMORIES</a></li>
+                <li><a href="/checkIn">HOTEL</a></li>
+                <li><a href="/search">IAȘI MAP</a></li>
+                <li><a href="/weather">WEATHER</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+</section>
+
+<div class ="information">
+    <p>Date and Time: <span th:text="${dateTime}"></span></p>
+    <p>Description: <span th:text="${description}"></span></p>
+    <p>Temperature: <span th:text="${temperature}"></span>°C</p>
+    <p>Wind Speed: <span th:text="${windSpeed}"></span> km/h</p>
+    <p>Relative Humidity: <span th:text="${relativeHumidity}"></span>%</p>
+    <p>Pressure: <span th:text="${pressure}"></span> mb</p>
+    <p>Cloud Cover: <span th:text="${cloudCover}"></span>%</p>
+    <p>Visibility: <span th:text="${visibility}"></span> km</p>
+    <p>UV Index: <span th:text="${uvIndex}"></span></p>
+    <p>Precipitation (past 24 hours): <span th:text="${precipitation}"></span> mm</p>
+</div>
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-250px";
+    }
+
+</script>
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <link rel="stylesheet" th:href="@{/css/checkin-form.css}" />
+  <link rel="stylesheet" th:href="@{/css/starting.css}" />
+  <head>
+    <title>Traducător</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('https://i.pinimg.com/originals/9d/eb/08/9deb08cbac490f5fa43032499f61c581.jpg');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .form-container {
+      width: 45%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      color: white;
+    }
+
+    button {
+      align-self: center;
+      background-color: #fff;
+      background-image: none;
+      background-position: 0 90%;
+      background-repeat: repeat no-repeat;
+      background-size: 4px 3px;
+      border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+      border-style: solid;
+      border-width: 2px;
+      box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+      box-sizing: border-box;
+      color: #41403e;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Neucha, sans-serif;
+      font-size: 1rem;
+      line-height: 23px;
+      outline: none;
+      padding: .75rem;
+      text-decoration: none;
+      transition: all 235ms ease-in-out;
+      border-bottom-left-radius: 15px 255px;
+      border-bottom-right-radius: 225px 15px;
+      border-top-left-radius: 255px 15px;
+      border-top-right-radius: 15px 225px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    button:hover {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+      transform: translate3d(0, 2px, 0);
+    }
+
+    button:focus {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+    }
+
+    .result {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+
+    }
+
+    .result h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .result p {
+      margin: 0;
+      color: white;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+  </head>
+<body>
+<section>
+  <nav>
+    <div class="nav-links" id="navLinks">
+      <i class="fa fa-times" onclick="hideMenu()"></i>
+      <ul>
+        <li><a href="/atractii">ATTRACTIONS</a></li>
+        <li><a href="/best">ITINERARY</a></li>
+        <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+        <li><a href="/memory">POSTCARD</a></li>
+        <li><a href="/postcards">TRIP MEMORIES</a></li>
+        <li><a href="/checkIn">HOTEL</a></li>
+        <li><a href="/search">IAȘI MAP</a></li>
+        <li><a href="/weather">WEATHER</a></li>
+
+      </ul>
+    </div>
+    <i class="fa fa-bars" onclick="showMenu()"></i>
+  </nav>
+
+<body>
+
+
+
+<div class="center-this">
+
+  <br>
+  <br>
+
+
+  <div class="form-container">
+
+    <form th:action="@{/checkin}" method="post">
+      <label for="checkinDate">Check-in Date:</label>
+      <input type="date" id="checkinDate" name="checkinDate" required>
+
+      <label for="checkinDate">Check-out Date:</label>
+      <input type="date" id="checkoutDate" name="checkoutDate" required>
+
+      <button type="submit">Check-in</button>
+    </form>
+
+    <script>
+                // Set the minimum value of the checkinDate input to the current date
+                document.getElementById("checkinDate").min = new Date().toISOString().split("T")[0];
+                document.getElementById("checkoutDate").min = new Date().toISOString().split("T")[0];
+            </script>
+  </div>
+</div>
+</body>
+
+</html>

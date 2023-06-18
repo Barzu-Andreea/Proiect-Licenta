@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Planner</title>
+    <link rel="stylesheet" th:href="@{/css/starting.css}" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('https://i.pinimg.com/originals/9d/eb/08/9deb08cbac490f5fa43032499f61c581.jpg');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            padding: 2% 3%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+        .nav-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #cd4137;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+        .lista {
+            color: white;
+        }
+        .matrice {
+            color: white;
+        }
+        .map-container {
+            width: 50%;
+            height: 100vh;
+            float: right;
+        }
+        #myMap {
+            height: 100%;
+            width: 100%;
+        }
+        .ruta-title {
+    font-size: 24px;
+    color: #fff;
+}
+
+.ruta-content {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+}
+
+.ruta-description {
+    font-size: 18px;
+    color: #fff;
+}
+
+.ruta-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ruta-steps li {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.matrice-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.matrice-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.matrice-cell {
+    text-align: center;
+}
+.itinerary{
+color: white;}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        color: white;
+    }
+
+    th {
+        background-color: 	#708090;
+    }
+
+    button {
+      align-self: center;
+      background-color: #fff;
+      background-image: none;
+      background-position: 0 90%;
+      background-repeat: repeat no-repeat;
+      background-size: 4px 3px;
+      border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+      border-style: solid;
+      border-width: 2px;
+      box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+      box-sizing: border-box;
+      color: #41403e;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Neucha, sans-serif;
+      font-size: 1rem;
+      line-height: 23px;
+      outline: none;
+      padding: .75rem;
+      text-decoration: none;
+      transition: all 235ms ease-in-out;
+      border-bottom-left-radius: 15px 255px;
+      border-bottom-right-radius: 225px 15px;
+      border-top-left-radius: 255px 15px;
+      border-top-right-radius: 15px 225px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    button:hover {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+      transform: translate3d(0, 2px, 0);
+    }
+
+    button:focus {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+    }
+
+    </style>
+</head>
+<body>
+<section>
+    <nav>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="/atractii">ATTRACTIONS</a></li>
+                <li><a href="/best">ITINERARY</a></li>
+                <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+                <li><a href="/memory">POSTCARD</a></li>
+                <li><a href="/postcards">TRIP MEMORIES</a></li>
+                <li><a href="/checkIn">HOTEL</a></li>
+                <li><a href="/search">IAȘI MAP</a></li>
+                <li><a href="/weather">WEATHER</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+</section>
+
+<section class="lista">
+
+    <div class="ruta-content" th:if="${optimalPath}"> <br>
+        <p class="ruta-description">The optimal route is: </p>
+        <ul class="ruta-steps">
+            <li th:each="step : ${optimalPath}" th:text="${step}"></li>
+        </ul>
+    </div>
+
+
+</section>
+<br>
+
+<section class="matrice">
+
+    <table class="matrice-table">
+        <p style="color: white; font-size: 18px; margin-top: 30px; text-align: center; margin-left: auto; margin-right: auto; width: 50%;" > Distance Matrix </p>
+        <tbody>
+        <tr th:each="row : ${distantaMatrice}">
+            <td th:each="value : ${row}" th:text="${value}" class="matrice-cell"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<br>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Attraction</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="node : ${itineraryList}">
+        <td th:text="${node.get('attraction')}"></td>
+        <td th:text="${node.get('lat')}"></td>
+        <td th:text="${node.get('lon')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p style="color: white; font-size: 18px; margin-top: 30px; text-align: center; margin-left: auto; margin-right: auto; width: 50%;" th:text="'The number of meters in the tour: ' + ${meters}"></p>
+
+
+<section class="lista" style="text-align: center;">
+    <button onclick="clearItinerary()" style="margin-left: auto; margin-right: auto;">Clear Itinerary</button>
+</section>
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-250px";
+    }
+
+        function clearItinerary() {
+        // Utilizăm funcția fetch pentru a face un request GET către ruta /clear
+        fetch('/clear', {method: 'GET'})
+            .then(response => {
+                if (response.ok) {
+                    // Dacă răspunsul este OK, reîncarcăm pagina pentru a actualiza itinerarul
+                    location.reload();
+                } else {
+                    console.error('Eroare la ștergerea itinerarului.');
+                }
+            })
+            .catch(error => {
+                console.error('Eroare la ștergerea itinerarului:', error);
+            });
+    }
+
+</script>
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>
+

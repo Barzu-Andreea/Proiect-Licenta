@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Atractii</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/starting.css}" />
+    <style>
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        .nav-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #cd4137;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+
+        /* Optional custom styles */
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            /* Adăugăm această linie pentru a elimina marginile implicite ale corpului paginii */
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+                url('https://i.pinimg.com/originals/9d/eb/08/9deb08cbac490f5fa43032499f61c581.jpg') !important;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            background-color: background-color: rgba(255, 255, 255, 0.8);
+            /* Setează un fundal alb pentru carduri */
+            border-radius: 8px;
+            /* Adaugă colțuri rotunjite pentru carduri */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Adaugă o umbră sub carduri */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color:white;
+        }
+
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: white;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Show up to 3 lines of text */
+            -webkit-box-orient: vertical;
+        }
+
+        .card-text.expanded {
+            overflow: initial;
+            -webkit-line-clamp: initial;
+        }
+
+        .product-wrapper {
+            float: left;
+            padding: 60px;
+            text-align: center;
+            margin-left: 80px;
+            box-sizing: border-box;
+            width: 440px;
+            box-shadow: 0 0 0 2px #fff;
+            background-color: rgba(128,128,128, 0.4);
+
+            cursor: pointer;
+            border-radius: 30px;
+            box-shadow: 0 0 25px 0 rgba(58, 15, 5, 0.5);
+        }
+
+        /* Stiluri pentru afișarea atractiilor pe aceeași linie */
+        .product-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        /* Stiluri pentru slider */
+        .slider {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 440px;
+            margin-right: 40px;
+        }
+    </style>
+    <script>
+        function expandDescription(element) {
+            var cardText = element.parentNode.parentNode.querySelector('.card-text');
+            cardText.classList.remove('card-text');
+            cardText.classList.add('card-text-expanded');
+            element.parentNode.remove();
+        }
+    </script>
+</head>
+<body>
+<nav>
+    <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+        <ul>
+            <li><a href="/atractii">ATTRACTIONS</a></li>
+            <li><a href="/best">ITINERARY</a></li>
+            <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+            <li><a href="/memory">POSTCARD</a></li>
+            <li><a href="/postcards">TRIP MEMORIES</a></li>
+            <li><a href="/checkIn">HOTEL</a></li>
+            <li><a href="/search">IAȘI MAP</a></li>
+            <li><a href="/weather">WEATHER</a></li>
+        </ul>
+    </div>
+    <i class="fa fa-bars" onclick="showMenu()"></i>
+</nav>
+
+<div class="slider">
+    <div class="slide-container">
+        <div th:each="postcard : ${postcards}" class="slide">
+            <div class="product-wrapper">
+                <img th:src="${postcard.imageUrl}" alt="Imagine atractie" class="card-img-top" width="100" height="225">
+                <div class="card-body">
+                    <h5 th:text="${postcard.name}" class="card-title"></h5>
+                    <p th:text="${postcard.message}" class="card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        // Slider cu ajutorul JavaScript
+        const slideContainer = document.querySelector('.slide-container');
+        const slides = Array.from(document.querySelectorAll('.slide'));
+
+        let currentIndex = 0;
+        const slideWidth = slides[currentIndex].getBoundingClientRect().width;
+
+        // Setează lățimea slide-ului containerului
+        slideContainer.style.width = `${slideWidth * slides.length}px`;
+
+        function nextSlide() {
+            currentIndex++;
+            if (currentIndex === slides.length) {
+                currentIndex = 0;
+            }
+            slide();
+        }
+
+        function slide() {
+            slideContainer.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        }
+
+        setInterval(nextSlide, 5000); // Schimbă slide-ul la fiecare 5 secunde
+    </script>
+
+</body>
+</html>

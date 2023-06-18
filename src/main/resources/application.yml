@@ -1,0 +1,28 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          azure-ad:
+            authorization-uri: https://login.microsoftonline.com/1c18734c-5d51-4f5e-ac63-374469b32dac/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/1c18734c-5d51-4f5e-ac63-374469b32dac/oauth2/v2.0/token
+            jwk-set-uri: https://login.microsoftonline.com/1c18734c-5d51-4f5e-ac63-374469b32dac/discovery/v2.0/keys
+        registration:
+          azure-client:
+            provider: azure-ad
+            client-id: e2fe4d5f-f3b4-4441-a5da-5254ed767218
+            client-secret: SX48Q~XAJW7DOuvFe1IUkCLO-_UJZwcuzsV~Ob56
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8082/login/oauth2/code/spring-security-azure
+            scope: openid,profile
+  datasource:
+    url: jdbc:sqlserver://cc-app.database.windows.net:1433;database=cc-app;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: cc-app
+    password: Cloud-Computing@123
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+server:
+  forward-headers-strategy: native

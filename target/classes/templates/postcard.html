@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/starting.css}" />
+<head>
+    <meta charset="UTF-8">
+    <title>Postcard</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('https://i.pinimg.com/originals/9d/eb/08/9deb08cbac490f5fa43032499f61c581.jpg');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+       background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 600px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    input {
+      align-self: center;
+      background-color: #fff;
+      background-image: none;
+      background-position: 0 90%;
+      background-repeat: repeat no-repeat;
+      background-size: 4px 3px;
+      border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+      border-style: solid;
+      border-width: 2px;
+      box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+      box-sizing: border-box;
+      color: #41403e;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Neucha, sans-serif;
+      font-size: 1rem;
+      line-height: 23px;
+      outline: none;
+      padding: .75rem;
+      text-decoration: none;
+      transition: all 235ms ease-in-out;
+      border-bottom-left-radius: 15px 255px;
+      border-bottom-right-radius: 225px 15px;
+      border-top-left-radius: 255px 15px;
+      border-top-right-radius: 15px 225px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    input:hover {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+      transform: translate3d(0, 2px, 0);
+    }
+
+    input:focus {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+    }
+  </style>
+<body>
+    <section >
+        <nav>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="/atractii">ATTRACTIONS</a></li>
+                    <li><a href="/best">ITINERARY</a></li>
+                    <li><a href="/translate">TRANSLATION & AUDIO</a></li>
+                    <li><a href="/memory">POSTCARD</a></li>
+                    <li><a href="/postcards">TRIP MEMORIES</a></li>
+                    <li><a href="/checkIn">HOTEL</a></li>
+                    <li><a href="/search">IAȘI MAP</a></li>
+                    <li><a href="/weather">WEATHER</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+
+    </section>
+</head>
+
+
+    <div class="container">
+
+
+
+        <form action="/savePostcard" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Name" required/><br/><br/>
+<!--            <input type="text" name="message" placeholder="Message" required/><br/><br/>-->
+            <textarea name="message" placeholder="Message" rows="5" required></textarea><br/><br/>
+            <input type="file" name="file" required/><br/><br/>
+            <input type="submit" value="Încarcă postcard"/>
+        </form>
+    </div>
+
+    </body>
+
+</html>

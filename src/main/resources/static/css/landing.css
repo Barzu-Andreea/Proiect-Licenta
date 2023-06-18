@@ -1,0 +1,238 @@
+* {
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        *::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #4b4d4e69;
+        }
+
+        .header {
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('https://www.antena3.ro/thumbs/big4/2023/05/18/iasi-gazda-cel-mai-important-eveniment-regional-medical-academic-farmaceutic-834930.webp');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .header img {
+            margin-left: -30px;
+            width: 200px;
+        }
+
+        nav {
+            display: flex;
+            padding: 2% 3%;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav img {
+            width: 200px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        .nav-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #cd4137;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+
+        .text-box {
+            width: 90%;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .text-box h1 {
+            font-size: 100px;
+            color:transparent;
+            background-clip:border-box;
+            -webkit-text-stroke: 1px #fff;
+            background: url(../images/back.png);
+            -webkit-background-clip: text;
+            background-position: 0 0;
+            animation: back 20s linear infinite;
+        }
+
+        @keyframes back {
+            100% {
+                background-position: 2000px 0;
+            }
+        }
+
+        .text-box p {
+            margin: 10px 0 40px;
+            font-size: 17px;
+            color: #fff;
+        }
+
+        .reg-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 12px 34px;
+            border-radius: 25px;
+            font-size: 15px;
+            background: transparent;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .reg-btn:hover {
+            background: #fff;
+            color: #333;
+            transition: 1s;
+        }
+
+        .log-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 12px 34px;
+            border-radius: 25px;
+            font-size: 15px;
+            background: transparent;
+            position: relative;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .log-btn:hover {
+            background: #fff;
+            color: #333;
+            transition: 1s;
+        }
+
+        .fa-bars {
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .section {
+            width: 100%;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .section div {
+            margin: 20px auto;
+            padding: 20px;
+            width: 70%;
+            position: relative;
+            background: #f4f4f4;
+        }
+
+        .section div h1 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .section div p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .fa-times {
+            position: absolute;
+            right: 5%;
+            top: 3%;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .text-box h1 {
+                font-size: 70px;
+            }
+
+            .nav-links ul li {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                background: #333;
+                height: 100vh;
+                width: 200px;
+                top: 0;
+                right: -200px;
+                text-align: left;
+                z-index: 2;
+                transition: 1s;
+            }
+
+            nav .fa {
+                display: block;
+                color: #fff;
+                margin: 10px;
+                font-size: 22px;
+                cursor: pointer;
+            }
+
+            .nav-links ul {
+                padding: 30px;
+            }
+
+            .nav-links ul li a {
+                font-size: 20px;
+            }
+
+            .nav-links ul li::after {
+                display: none;
+            }
+
+            .showMenu {
+                right: 0;
+            }
+
+            .text-box {
+                width: 90%;
+            }
+        }
