@@ -13,7 +13,7 @@ spring:
             client-id: e2fe4d5f-f3b4-4441-a5da-5254ed767218
             client-secret: SX48Q~XAJW7DOuvFe1IUkCLO-_UJZwcuzsV~Ob56
             authorization-grant-type: authorization_code
-            redirect-uri: redirect-uri: https://discoveriasi.azurewebsites.net/login/oauth2/code/spring-security-azure
+            redirect-uri: https://discoveriasi.azurewebsites.net/login/oauth2/code/spring-security-azure
             scope: openid,profile
   datasource:
     url: jdbc:sqlserver://cc-app.database.windows.net:1433;database=cc-app;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
